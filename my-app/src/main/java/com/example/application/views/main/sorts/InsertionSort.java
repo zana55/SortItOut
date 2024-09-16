@@ -67,7 +67,9 @@ public class InsertionSort <T extends Comparable<T>> implements SortAlgorithm<T>
     }
 
     private void swap(T[] array, int j) {
-        array[j + 1] = array[j];
+        T temp = array[j];
+        array[j] = array[j + 1];
+        array[j + 1] = temp;
     }
 
     private void visual_swap(T[] array, UI ui){

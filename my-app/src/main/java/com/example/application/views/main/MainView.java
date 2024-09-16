@@ -1,6 +1,7 @@
 package com.example.application.views.main;
 
 import com.example.application.views.MainLayout;
+import com.example.application.views.database.ATRService;
 import com.example.application.views.main.sorts.*;
 import com.example.application.views.parser.AST_Execution_Thread;
 import com.example.application.views.parser.Algorithm_Node;
@@ -25,6 +26,7 @@ import com.vaadin.flow.component.upload.receivers.MemoryBuffer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -57,17 +59,22 @@ public class MainView extends VerticalLayout {
     private final Grid<SortTime> timingGrid;
     private VerticalLayout visualGroup = new VerticalLayout();
 
+    @Autowired
+    private ATRService algorithmTestResultService;
+
+
     // setting up all components
     public MainView() {
         algorithmSelector = new MultiSelectComboBox<>("Choose one or multiple sorting algorithms!");
         algorithmSelector.setItems("Bubble Sort", "Insertion Sort", "Merge Sort", "Selection Sort", "Quick Sort");
-        algorithmSelector.setWidth("40%");
+        algorithmSelector.setWidth("30%");
 
-        Button nextButton = new Button("Next!", e -> createList());
+        Button nextButton = new Button("Apply!", e -> createList());
         nextButton.getStyle().set("margin-top", "40px");
+        nextButton.getStyle().set("margin-right", "100px");
 
         inputCodeField = new TextArea("Or create your own sorting algorithm!");
-        inputCodeField.setWidth("60%");
+        inputCodeField.setWidth("30%");
 
         Button doneButton = new Button("Done!", e -> createAlgorithm());
         doneButton.getStyle().set("margin-top", "40px");
@@ -83,12 +90,10 @@ public class MainView extends VerticalLayout {
         selectedGrid.removeAllColumns();
         selectedGrid.addColumn(n -> n).setHeader("Selected algorithms");
 
-        customGroup.setWidth("40%");
-        customGroup.getStyle().set("margin-left", "250px");
+        customGroup.setWidth("60%");
+        customGroup.getStyle().set("margin-left", "100px");
 
         horizontalGroup.add(selectedGrid, customGroup);
-        horizontalGroup.setFlexGrow(0, selectedGrid);
-        horizontalGroup.setFlexGrow(1, customGroup);
         horizontalGroup.setWidth("100%");
 
         mainVertical.add(horizontalGroup);
@@ -189,7 +194,20 @@ public class MainView extends VerticalLayout {
     }
 
     private void createAlgorithm() {
+        if(inputCodeField.getValue() == null)
+        {
+            Notification.show("No code provided.");
+            return;
+        }
+
         String input = getInput();
+
+        if (input == null)
+        {
+            Notification.show("No data provided.");
+            return;
+        }
+
         Integer[] numbers = parseInput(input);
 
         customGroup.removeAll();
@@ -214,11 +232,11 @@ public class MainView extends VerticalLayout {
 
                     Integer[] array = memory.get_data().toArray(new Integer[0]);
                     customSort.start(array, currentUI);
-                    Thread.sleep(30);
+                    Thread.sleep(10);
                 }
                 Integer[] array = memory.get_data().toArray(new Integer[0]);
                 customSort.start(array, currentUI);
-                Thread.sleep(30);
+                Thread.sleep(10);
 
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
@@ -324,6 +342,8 @@ public class MainView extends VerticalLayout {
                 double durationMs = convertNsToMs(endTime - startTime);
                 timings.add(new SortTime(algorithm, durationMs));
 
+                onAlgorithmFinish(algorithm, numbers.length, durationMs);
+
                 System.out.println(algorithm);
                 System.out.println(durationMs);
 
@@ -347,8 +367,12 @@ public class MainView extends VerticalLayout {
     private void animate(Set<String> selectedAlgorithms, Integer[] numbers)
     {
         visualGroup.removeAll();
-        visualGroup.add(new AnimatedSort<Integer>(selectedAlgorithms, numbers));
+        visualGroup.add(new AnimatedSort<>(selectedAlgorithms, numbers));
         visualGroup.setVisible(true);
+    }
+
+    private void onAlgorithmFinish(String algorithmName, int arrayLength, double timeTaken) {
+        algorithmTestResultService.saveTestResult(algorithmName, arrayLength, timeTaken);
     }
 
     // parsing input, space or comma separated allowed

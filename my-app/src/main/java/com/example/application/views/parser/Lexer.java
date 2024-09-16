@@ -9,7 +9,7 @@ public class Lexer {
         input_code = input;
         for (int i = 0; i < input_code.length(); ++i) {
             char c = input_code.charAt(i);
-            if(c == ' '){
+            if(c == ' ' || c == '\t'){
                 continue;
             }
             else if(Character.isLetter(c) || c == '_'){

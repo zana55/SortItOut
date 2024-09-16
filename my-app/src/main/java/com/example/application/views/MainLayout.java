@@ -1,6 +1,7 @@
 package com.example.application.views;
 
 import com.example.application.views.about.AboutView;
+import com.example.application.views.database.DataView;
 import com.example.application.views.main.MainView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.html.H1;
@@ -30,12 +31,14 @@ public class MainLayout extends AppLayout {
 
         // Create navigation links
         RouterLink mainViewLink = new RouterLink("Home", MainView.class);
-        RouterLink aboutViewLink = new RouterLink("About", AboutView.class);
+        RouterLink aboutViewLink = new RouterLink("About custom algorithms", AboutView.class);
+        RouterLink dataViewLink = new RouterLink("Statistics for algorithms", DataView.class);
         mainViewLink.addClassNames(LumoUtility.TextColor.SECONDARY, LumoUtility.FontSize.MEDIUM, LumoUtility.Margin.MEDIUM);
         aboutViewLink.addClassNames(LumoUtility.TextColor.SECONDARY, LumoUtility.FontSize.MEDIUM, LumoUtility.Margin.MEDIUM);
+        dataViewLink.addClassNames(LumoUtility.TextColor.SECONDARY, LumoUtility.FontSize.MEDIUM, LumoUtility.Margin.MEDIUM);
 
         // Navigation bar layout
-        HorizontalLayout navBar = new HorizontalLayout(mainViewLink, aboutViewLink);
+        HorizontalLayout navBar = new HorizontalLayout(mainViewLink, aboutViewLink, dataViewLink);
         navBar.setAlignItems(FlexComponent.Alignment.CENTER); // Align items in the center
         navBar.setSpacing(true); // Add some spacing between the links
         //navBar.getStyle().set("background-color", "#FFF0F5");
