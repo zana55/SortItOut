@@ -10,7 +10,7 @@ import static com.example.application.views.main.HelperFunctions.createBars;
 
 public class BubbleSort<T extends Comparable<T>> implements SortAlgorithm<T> {
 
-    private static final int ANIMATION_DELAY = 100; // Milliseconds
+    private static final int ANIMATION_DELAY = 200; // Milliseconds
     private boolean visualize;
     private Div container;
 
@@ -56,7 +56,7 @@ public class BubbleSort<T extends Comparable<T>> implements SortAlgorithm<T> {
                     }
                 }
             }
-            latch.countDown(); // Signal that this thread is finished
+            latch.countDown();
         }).start();
     }
 

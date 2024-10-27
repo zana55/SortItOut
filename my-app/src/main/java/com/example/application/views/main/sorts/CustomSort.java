@@ -9,14 +9,17 @@ import static com.example.application.views.main.HelperFunctions.createBars;
 
 public class CustomSort extends VerticalLayout {
     private Integer[] numbers;
+    private String name;
     private Div barsContainer;
 
-    public CustomSort(Integer[] array)
+    public CustomSort(Integer[] array, String name_)
     {
         numbers = array;
+        name = name_;
         VerticalLayout group = new VerticalLayout();
+        group.getStyle().set("margin-top", "-55px");
 
-        Span label = new Span("Custom algorithm");
+        Span label = new Span(name);
         label.getStyle().set("display", "block").set("text-align", "center");
         group.add(label);
 
@@ -34,8 +37,6 @@ public class CustomSort extends VerticalLayout {
     public void start(Integer[] currentArray, UI currentUI)
     {
         Integer[] arrayCopy = currentArray.clone();
-        if(currentUI == null)
-            System.out.println("Hey");
         if (currentUI != null) {
             currentUI.access(() -> {
                 createBars(barsContainer, arrayCopy);

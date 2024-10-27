@@ -3,6 +3,7 @@ package com.example.application.views;
 import com.example.application.views.about.AboutView;
 import com.example.application.views.database.DataView;
 import com.example.application.views.main.MainView;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Header;
@@ -24,12 +25,10 @@ public class MainLayout extends AppLayout {
     }
 
     private void addHeaderContent() {
-        // Create a title
+
         viewTitle = new H1("Sort-it-out!");
         viewTitle.addClassNames(LumoUtility.TextColor.SECONDARY, LumoUtility.FontSize.XXXLARGE, LumoUtility.Margin.MEDIUM);
-        //viewTitle.getStyle().set("background-color", "#FFF0F5");
 
-        // Create navigation links
         RouterLink mainViewLink = new RouterLink("Home", MainView.class);
         RouterLink aboutViewLink = new RouterLink("About custom algorithms", AboutView.class);
         RouterLink dataViewLink = new RouterLink("Statistics for algorithms", DataView.class);
@@ -37,19 +36,15 @@ public class MainLayout extends AppLayout {
         aboutViewLink.addClassNames(LumoUtility.TextColor.SECONDARY, LumoUtility.FontSize.MEDIUM, LumoUtility.Margin.MEDIUM);
         dataViewLink.addClassNames(LumoUtility.TextColor.SECONDARY, LumoUtility.FontSize.MEDIUM, LumoUtility.Margin.MEDIUM);
 
-        // Navigation bar layout
         HorizontalLayout navBar = new HorizontalLayout(mainViewLink, aboutViewLink, dataViewLink);
-        navBar.setAlignItems(FlexComponent.Alignment.CENTER); // Align items in the center
-        navBar.setSpacing(true); // Add some spacing between the links
-        //navBar.getStyle().set("background-color", "#FFF0F5");
+        navBar.setAlignItems(FlexComponent.Alignment.CENTER);
+        navBar.setSpacing(true);
 
-        // Header layout
         Header header = new Header(new HorizontalLayout(viewTitle, navBar));
         header.getStyle().set("width", "100%");
         header.getStyle().set("padding", "0 1em");
         header.getStyle().set("align-items", "center");
         header.getStyle().set("justify-content", "space-between");
-        //header.getStyle().set("background-color", "#FFF0F5");
 
         addToNavbar(header);
     }
@@ -58,6 +53,14 @@ public class MainLayout extends AppLayout {
     protected void afterNavigation() {
         super.afterNavigation();
         viewTitle.setText(getCurrentPageTitle());
+
+        UI.getCurrent().getPage().getHistory().replaceState(null, getCurrentPageUrl());
+    }
+
+    private String getCurrentPageUrl() {
+
+        RouterLink currentLink = new RouterLink("", getContent().getClass());
+        return currentLink.getHref();
     }
 
     private String getCurrentPageTitle() {

@@ -10,7 +10,7 @@ import static com.example.application.views.main.HelperFunctions.createBars;
 
 public class SelectionSort<T extends Comparable<T>> implements SortAlgorithm<T> {
 
-    private static final int ANIMATION_DELAY = 100; // Milliseconds
+    private static final int ANIMATION_DELAY = 200;
     private boolean visualize;
     private Div container;
 

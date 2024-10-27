@@ -10,7 +10,7 @@ import static com.example.application.views.main.HelperFunctions.createBars;
 
 public class MergeSort<T extends Comparable<T>> implements SortAlgorithm<T> {
 
-    private static final int ANIMATION_DELAY = 100; // Milliseconds
+    private static final int ANIMATION_DELAY = 200;
     private boolean visualize;
     private Div container;
 
@@ -30,48 +30,47 @@ public class MergeSort<T extends Comparable<T>> implements SortAlgorithm<T> {
 
     public void normalSort(T[] array) {
         if (array.length < 2) {
-            return; // An array of size 0 or 1 is already sorted
+            return;
         }
-        T[] tempArray = array.clone(); // Temporary array to hold the sorted elements
+        T[] tempArray = array.clone();
         mergeSort(array, tempArray, 0, array.length - 1);
     }
 
     public void visualSort(T[] array, CountDownLatch latch) {
         if (array.length < 2) {
-            return; // An array of size 0 or 1 is already sorted
+            return;
         }
         UI currentUI = UI.getCurrent();
         new Thread(() -> {
-            T[] tempArray = array.clone(); // Temporary array to hold the sorted elements
+            T[] tempArray = array.clone();
             visualMergeSort(array, tempArray, 0, array.length - 1, currentUI);
-            latch.countDown(); // Signal that this thread is finished
+            latch.countDown();
         }).start();
     }
 
     private void mergeSort(T[] array, T[] tempArray, int leftStart, int rightEnd) {
         if (leftStart >= rightEnd) {
-            return; // Base case: a single element is always sorted
+            return;
         }
 
         int middle = (leftStart + rightEnd) / 2;
-        mergeSort(array, tempArray, leftStart, middle); // Sort left half
-        mergeSort(array, tempArray, middle + 1, rightEnd); // Sort right half
-        merge(array, tempArray, leftStart, middle, rightEnd); // Merge both halves
+        mergeSort(array, tempArray, leftStart, middle);
+        mergeSort(array, tempArray, middle + 1, rightEnd);
+        merge(array, tempArray, leftStart, middle, rightEnd);
     }
 
     private void visualMergeSort(T[] array, T[] tempArray, int leftStart, int rightEnd, UI currentUI) {
         if (leftStart >= rightEnd) {
-            return; // Base case: a single element is always sorted
+            return;
         }
 
         int middle = (leftStart + rightEnd) / 2;
-        visualMergeSort(array, tempArray, leftStart, middle, currentUI); // Sort left half
-        visualMergeSort(array, tempArray, middle + 1, rightEnd, currentUI); // Sort right half
-        visualMerge(array, tempArray, leftStart, middle, rightEnd, currentUI); // Merge both halves
+        visualMergeSort(array, tempArray, leftStart, middle, currentUI);
+        visualMergeSort(array, tempArray, middle + 1, rightEnd, currentUI);
+        visualMerge(array, tempArray, leftStart, middle, rightEnd, currentUI);
     }
 
     private void merge(T[] array, T[] tempArray, int leftStart, int middle, int rightEnd) {
-        // Copy both halves into a temporary array
         System.arraycopy(array, leftStart, tempArray, leftStart, rightEnd - leftStart + 1);
 
         int left = leftStart;
@@ -87,12 +86,11 @@ public class MergeSort<T extends Comparable<T>> implements SortAlgorithm<T> {
             }
             current++;
         }
-        // Copy any remaining elements from the left half
+
         System.arraycopy(tempArray, left, array, current, middle - left + 1);
     }
 
     private void visualMerge(T[] array, T[] tempArray, int leftStart, int middle, int rightEnd, UI currentUI) {
-        // Copy both halves into a temporary array
         System.arraycopy(array, leftStart, tempArray, leftStart, rightEnd - leftStart + 1);
 
         int left = leftStart;
@@ -101,7 +99,7 @@ public class MergeSort<T extends Comparable<T>> implements SortAlgorithm<T> {
 
         while (left <= middle && right <= rightEnd) {
             if (tempArray[left].compareTo(tempArray[right]) <= 0) {
-                array[current] = tempArray[left]; // tu se treba crtati visual swap
+                array[current] = tempArray[left];
                 visual_swap(array, currentUI);
                 try {
                     Thread.sleep(ANIMATION_DELAY);

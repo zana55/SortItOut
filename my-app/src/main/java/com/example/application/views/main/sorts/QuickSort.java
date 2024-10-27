@@ -9,7 +9,7 @@ import java.util.concurrent.CountDownLatch;
 import static com.example.application.views.main.HelperFunctions.createBars;
 
 public class QuickSort<T extends Comparable<T>> implements SortAlgorithm<T> {
-    private static final int ANIMATION_DELAY = 100; // Milliseconds
+    private static final int ANIMATION_DELAY = 200;
     private boolean visualize;
     private Div container;
 
@@ -55,30 +55,29 @@ public class QuickSort<T extends Comparable<T>> implements SortAlgorithm<T> {
     }
 
     private int partition(T[] array, int low, int high) {
-        T pivot = array[high]; // Choosing the last element as pivot
-        int i = low - 1; // Pointer for the smaller element
+        T pivot = array[high];
+        int i = low - 1;
 
         for (int j = low; j < high; j++) {
             if (array[j].compareTo(pivot) <= 0) {
                 i++;
-                // Swap elements at i and j
+
                 swap(array, i, j);
             }
         }
 
-        // Swap the pivot element with the element at i + 1
         swap(array, i + 1, high);
-        return i + 1; // Return the partition index
+        return i + 1;
     }
 
     private int visualPartition(T[] array, int low, int high, UI currentUI) {
-        T pivot = array[high]; // Choosing the last element as pivot
-        int i = low - 1; // Pointer for the smaller element
+        T pivot = array[high];
+        int i = low - 1;
 
         for (int j = low; j < high; j++) {
             if (array[j].compareTo(pivot) <= 0) {
                 i++;
-                // Swap elements at i and j
+
                 swap(array, i, j);
                 visual_swap(array, currentUI);
                 try {
@@ -89,7 +88,6 @@ public class QuickSort<T extends Comparable<T>> implements SortAlgorithm<T> {
             }
         }
 
-        // Swap the pivot element with the element at i + 1
         swap(array, i + 1, high);
         visual_swap(array, currentUI);
         try {
@@ -97,7 +95,7 @@ public class QuickSort<T extends Comparable<T>> implements SortAlgorithm<T> {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-        return i + 1; // Return the partition index
+        return i + 1;
     }
 
     private void swap(T[] array, int i, int j) {

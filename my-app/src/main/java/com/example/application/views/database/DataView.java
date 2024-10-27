@@ -1,5 +1,8 @@
 package com.example.application.views.database;
 
+import com.example.application.entities.AlgorithmTestResult;
+import com.example.application.entities.AlgorithmUsage;
+import com.example.application.services.ATRService;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
@@ -15,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @PageTitle("Statistics for algorithms")
-@Route(value = "stats", layout = MainLayout.class)
+@Route(value = "/stats", layout = MainLayout.class)
 public class DataView extends VerticalLayout {
     @Autowired
     private ATRService algorithmTestResultService;
@@ -27,13 +30,10 @@ public class DataView extends VerticalLayout {
     Grid<AlgorithmUsage> gridPopular = new Grid<>();
 
     public DataView() {
-        H4 f5 = new H4("Find the most popular algorithms");
-        f5.getStyle().set("margin-left", "10px");
+        H4 f5 = createSubtitle("Find the most popular algorithms");
         add(f5);
 
-        Span f6 = new Span("Find the top three algorithms other users used the most.");
-        f6.getStyle().set("margin-left", "10px");
-        f6.setWidth("60%");
+        Span f6 = createSpan("Find the top three algorithms other users used the most.");
         add(f6);
 
         Button searchButton3 = new Button("Search!", e -> findPopularAlgorithms());
@@ -49,13 +49,10 @@ public class DataView extends VerticalLayout {
         gridPopular.getStyle().set("margin-left", "10px");
         add(gridPopular);
 
-        H4 f1 = new H4("Find the fastest execution times for a certain algorithm");
-        f1.getStyle().set("margin-left", "10px");
+        H4 f1 = createSubtitle("Find the fastest execution times for a certain algorithm");
         add(f1);
 
-        Span f2 = new Span("Enter the name of the algorithm (e.g. \"Bubble Sort\") to find the execution times and the corresponding array lengths it sorted.");
-        f2.getStyle().set("margin-left", "10px");
-        f2.setWidth("60%");
+        Span f2 = createSpan("Enter the name of the algorithm (e.g. \"Bubble Sort\") to find the execution times and the corresponding array lengths it sorted.");
         add(f2);
 
         inputFieldFast = new TextField("Enter the name here!");
@@ -73,13 +70,10 @@ public class DataView extends VerticalLayout {
         gridFast.getStyle().set("margin-left", "10px");
         add(gridFast);
 
-        H4 f3 = new H4("Find fastest algorithms for an array of a certain length");
-        f3.getStyle().set("margin-left", "10px");
+        H4 f3 = createSubtitle("Find fastest algorithms for an array of a certain length");
         add(f3);
 
-        Span f4 = new Span("Enter the maximum array length you want to consider to find the algorithms that had the shortest execution time for arrays of that length.");
-        f4.getStyle().set("margin-left", "10px");
-        f4.setWidth("60%");
+        Span f4 = createSpan("Enter the maximum array length you want to consider to find the algorithms that had the shortest execution time for arrays of that length.");
         add(f4);
 
         inputFieldNumber = new TextField("Enter the number here!");
@@ -135,6 +129,21 @@ public class DataView extends VerticalLayout {
         results = algorithmTestResultService.getTopThreeMostUsedAlgorithms();
         gridPopular.setItems(results);
         gridPopular.setVisible(true);
+    }
+
+    private Span createSpan(String content)
+    {
+        Span span = new Span (content);
+        span.setWidth("50%");
+        span.getStyle().set("margin-left", "10px");
+        return span;
+    }
+
+    private H4 createSubtitle(String content)
+    {
+        H4 title = new H4 (content);
+        title.getStyle().set("margin-left", "10px");
+        return title;
     }
 
 }
