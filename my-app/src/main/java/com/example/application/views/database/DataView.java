@@ -13,12 +13,14 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 @PageTitle("Statistics for algorithms")
 @Route(value = "/stats", layout = MainLayout.class)
+@AnonymousAllowed
 public class DataView extends VerticalLayout {
     @Autowired
     private ATRService algorithmTestResultService;

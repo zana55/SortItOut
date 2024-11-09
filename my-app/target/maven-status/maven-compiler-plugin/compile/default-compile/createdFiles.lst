@@ -1,5 +1,8 @@
+com\example\application\views\about\ParameterInfo.class
 com\example\application\views\main\parser\Size_Node.class
 com\example\application\views\main\sorts\AnimatedSort.class
+com\example\application\views\admin\AdminView.class
+com\example\application\entities\AdminRepository.class
 com\example\application\views\main\sorts\InsertionSort.class
 com\example\application\views\main\HelperFunctions.class
 com\example\application\views\main\sorts\CustomSort.class
@@ -9,6 +12,7 @@ com\example\application\entities\AlgorithmTestResult.class
 com\example\application\views\main\sorts\SelectionSort.class
 com\example\application\services\ATRService.class
 com\example\application\views\main\parser\Number_Node.class
+com\example\application\services\AdminDetailsService.class
 com\example\application\views\main\parser\Memory_Element_Array.class
 com\example\application\views\main\parser\ReturnException.class
 com\example\application\views\main\parser\Function_Parameter.class
@@ -17,6 +21,7 @@ com\example\application\Application.class
 com\example\application\views\main\parser\Token.class
 com\example\application\views\main\parser\Break_Node.class
 com\example\application\views\main\parser\Algorithm_Node.class
+com\example\application\views\admin\SecurityConfiguration.class
 com\example\application\views\main\parser\If_Node.class
 com\example\application\views\main\parser\Swap_Node.class
 com\example\application\views\main\parser\Variable_Node.class
@@ -29,11 +34,14 @@ com\example\application\views\main\parser\TokenType.class
 com\example\application\views\main\sorts\SortTime.class
 com\example\application\views\main\parser\Frame.class
 com\example\application\views\main\parser\Memory_Element_Integer.class
+com\example\application\views\admin\LoginView.class
 com\example\application\views\main\parser\Memory_Element.class
 com\example\application\views\main\parser\Return_Node.class
 com\example\application\views\MainLayout.class
 com\example\application\views\main\parser\Initialize_Array_Node.class
+com\example\application\services\SecurityService.class
 com\example\application\entities\ATRRepository.class
+com\example\application\entities\Admin.class
 com\example\application\views\about\KeywordInfo.class
 com\example\application\services\CAService.class
 com\example\application\views\main\parser\Block_Node.class

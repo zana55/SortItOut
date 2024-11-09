@@ -10,12 +10,14 @@ import static com.example.application.views.main.HelperFunctions.createBars;
 
 public class BubbleSort<T extends Comparable<T>> implements SortAlgorithm<T> {
 
-    private static final int ANIMATION_DELAY = 200; // Milliseconds
+    private static final int ANIMATION_DELAY = 130; // Milliseconds
     private boolean visualize;
+    private boolean descending;
     private Div container;
 
-    public BubbleSort(boolean visualize, Div container) {
+    public BubbleSort(boolean visualize, Div container, boolean descending) {
         this.visualize = visualize;
+        this.descending = descending;
         this.container = container;
     }
 
@@ -32,7 +34,8 @@ public class BubbleSort<T extends Comparable<T>> implements SortAlgorithm<T> {
         int n = array.length;
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
-                if (array[j].compareTo(array[j + 1]) > 0) {
+                if ((descending && array[j].compareTo(array[j + 1]) < 0) ||
+                        (!descending && array[j].compareTo(array[j + 1]) > 0)) {
                     swap(array, j, j + 1);
                 }
             }
@@ -45,7 +48,8 @@ public class BubbleSort<T extends Comparable<T>> implements SortAlgorithm<T> {
             int n = array.length;
             for (int i = 0; i < n - 1; i++) {
                 for (int j = 0; j < n - i - 1; j++) {
-                    if (array[j].compareTo(array[j + 1]) > 0) {
+                    if ((descending && array[j].compareTo(array[j + 1]) < 0) ||
+                            (!descending && array[j].compareTo(array[j + 1]) > 0)) {
                         swap(array, j, j + 1);
                         visual_swap(array, currentUI);
                         try {

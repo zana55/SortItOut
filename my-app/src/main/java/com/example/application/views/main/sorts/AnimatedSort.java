@@ -16,10 +16,12 @@ import static com.example.application.views.main.HelperFunctions.createBars;
 public class AnimatedSort<T extends Comparable<T>> extends VerticalLayout {
     private T[] numbers;
     private Div barsContainer;
+    private boolean descending;
     private Set<SortAlgorithm<T>> sorters = new LinkedHashSet<>();
     private Button startButton;
-    public AnimatedSort(Set<String> selectedAlgorithms, T[] numbers) {
+    public AnimatedSort(Set<String> selectedAlgorithms, T[] numbers, boolean descending) {
         this.numbers = numbers;
+        this.descending = descending;
 
         for(String algorithm : selectedAlgorithms)
         {
@@ -77,11 +79,11 @@ public class AnimatedSort<T extends Comparable<T>> extends VerticalLayout {
     private SortAlgorithm<T> getSorter(String algorithm)
     {
         return switch (algorithm) {
-            case "Bubble Sort" -> new BubbleSort<>(true, barsContainer);
-            case "Quick Sort" -> new QuickSort<>(true, barsContainer);
-            case "Merge Sort" -> new MergeSort<>(true, barsContainer);
-            case "Selection Sort" -> new SelectionSort<>(true, barsContainer);
-            case "Insertion Sort" -> new InsertionSort<>(true, barsContainer);
+            case "Bubble Sort" -> new BubbleSort<>(true, barsContainer, descending);
+            case "Quick Sort" -> new QuickSort<>(true, barsContainer, descending);
+            case "Merge Sort" -> new MergeSort<>(true, barsContainer, descending);
+            case "Selection Sort" -> new SelectionSort<>(true, barsContainer, descending);
+            case "Insertion Sort" -> new InsertionSort<>(true, barsContainer, descending);
             default -> null;
         };
     }

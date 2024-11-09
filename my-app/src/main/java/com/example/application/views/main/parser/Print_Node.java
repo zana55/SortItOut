@@ -17,6 +17,7 @@ public class Print_Node implements AST_Node {
     @Override
     public void execute(Memory memory) {
         if(expression instanceof Variable_Node) {
+            System.out.println(memory);
             Variable_Node variable = (Variable_Node) expression;
             System.out.println(memory.get_variable_value(variable.get_name()));
         } else {

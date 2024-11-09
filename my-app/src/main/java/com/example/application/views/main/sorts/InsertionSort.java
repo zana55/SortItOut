@@ -10,12 +10,14 @@ import static com.example.application.views.main.HelperFunctions.createBars;
 
 public class InsertionSort <T extends Comparable<T>> implements SortAlgorithm<T> {
 
-    private static final int ANIMATION_DELAY = 200;
+    private static final int ANIMATION_DELAY = 130;
     private boolean visualize;
+    private boolean descending;
     private Div container;
 
-    public InsertionSort(boolean visualize, Div container) {
+    public InsertionSort(boolean visualize, Div container, boolean descending) {
         this.visualize = visualize;
+        this.descending = descending;
         this.container = container;
     }
 
@@ -34,7 +36,8 @@ public class InsertionSort <T extends Comparable<T>> implements SortAlgorithm<T>
             T key = array[i];
             int j = i - 1;
 
-            while (j >= 0 && array[j].compareTo(key) > 0) {
+            while (j >= 0 && ((descending && array[j].compareTo(key) < 0) ||
+                    (!descending && array[j].compareTo(key) > 0))) {
                 array[j + 1] = array[j];
                 j--;
             }
@@ -50,7 +53,8 @@ public class InsertionSort <T extends Comparable<T>> implements SortAlgorithm<T>
                 T key = array[i];
                 int j = i - 1;
 
-                while (j >= 0 && array[j].compareTo(key) > 0) {
+                while (j >= 0 && ((descending && array[j].compareTo(key) < 0) ||
+                        (!descending && array[j].compareTo(key) > 0))) {
                     swap(array, j);
                     visual_swap(array, currentUI);
                     try {

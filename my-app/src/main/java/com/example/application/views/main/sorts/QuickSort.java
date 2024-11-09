@@ -9,12 +9,14 @@ import java.util.concurrent.CountDownLatch;
 import static com.example.application.views.main.HelperFunctions.createBars;
 
 public class QuickSort<T extends Comparable<T>> implements SortAlgorithm<T> {
-    private static final int ANIMATION_DELAY = 200;
+    private static final int ANIMATION_DELAY = 130;
     private boolean visualize;
+    private boolean descending;
     private Div container;
 
-    public QuickSort(boolean visualize, Div container) {
+    public QuickSort(boolean visualize, Div container, boolean descending) {
         this.visualize = visualize;
+        this.descending = descending;
         this.container = container;
     }
 
@@ -59,7 +61,8 @@ public class QuickSort<T extends Comparable<T>> implements SortAlgorithm<T> {
         int i = low - 1;
 
         for (int j = low; j < high; j++) {
-            if (array[j].compareTo(pivot) <= 0) {
+            if ((descending && array[j].compareTo(pivot) > 0) ||
+                    (!descending && array[j].compareTo(pivot) <= 0)) {
                 i++;
 
                 swap(array, i, j);
@@ -75,7 +78,8 @@ public class QuickSort<T extends Comparable<T>> implements SortAlgorithm<T> {
         int i = low - 1;
 
         for (int j = low; j < high; j++) {
-            if (array[j].compareTo(pivot) <= 0) {
+            if ((descending && array[j].compareTo(pivot) > 0) ||
+                    (!descending && array[j].compareTo(pivot) <= 0)) {
                 i++;
 
                 swap(array, i, j);

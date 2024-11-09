@@ -10,6 +10,7 @@ import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.LumoUtility.Margin;
 
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 
 @PageTitle("About custom algorithms")
 @Route(value = "/about", layout = MainLayout.class)
+@AnonymousAllowed
 public class AboutView extends VerticalLayout {
 
     public AboutView() {
@@ -61,7 +63,7 @@ public class AboutView extends VerticalLayout {
         items.add(new KeywordInfo("swap", "swap( array, index1, index2 )"));
         items.add(new KeywordInfo("sleep", "sleep( number )"));
         items.add(new KeywordInfo("size", "size( array )"));
-        items.add(new KeywordInfo("function", "function name( argument1, argument2 ){}"));
+        items.add(new KeywordInfo("function", "function name( parameters... ){}"));
         items.add(new KeywordInfo("return", "return - used inside function"));
 
         grid.setItems(items);
@@ -70,10 +72,6 @@ public class AboutView extends VerticalLayout {
         grid.addThemeVariants(GridVariant.LUMO_ROW_STRIPES);
 
         add(grid);
-
-        Span info = createSpan("*function can take as many arguments as you need");
-        info.getStyle().set("color", "red");
-        add(info);
 
         H4 operators = createSubtitle("Operators");
         add(operators);
@@ -129,8 +127,76 @@ public class AboutView extends VerticalLayout {
         Span p23 = createCode("if ( array [ 3 ] == 1 ){...}");
         Span p24 = createSpan("Function size returns the size of the array:");
         Span p25 = createCode("size( array )");
+        Span p30 = createSpan("Function swap takes the name of the array and indexes of elements you want to swap in the array: ");
+        Span p31 = createCode("swap( array, i, j )");
 
-        add(p6, p7, p8, p9, p10, p11, p12, p13, p22, p23, p24, p25);
+        add(p6, p7, p8, p9, p10, p11, p12, p13, p22, p23, p24, p25, p30, p31);
+
+        H4 fun = createSubtitle("Functions");
+        add(fun);
+
+        Span p32 = createSpan("You can define functions using the following sytnax: ");
+        Span p33 = createCode("function name( parameters... ) {}");
+        Span p34 = createSpan("The function can take 4 different types of parameters:");
+
+        Grid<ParameterInfo> gridParameters = new Grid<>();
+        gridParameters.addColumn(ParameterInfo::getType).setHeader("Type");
+        gridParameters.addColumn(ParameterInfo::getAbout).setHeader("Description");
+        gridParameters.addColumn(ParameterInfo::getSyntax).setHeader("Syntax");
+
+        ArrayList<ParameterInfo> itemsParameters = new ArrayList<>();
+
+        itemsParameters.add(new ParameterInfo("Variable", "Integer", "variable_name"));
+        itemsParameters.add(new ParameterInfo("Reference variable", "Reference to a variable", "&variable_name"));
+        itemsParameters.add(new ParameterInfo("Array", "Array of integers", "array_name[ ]"));
+        itemsParameters.add(new ParameterInfo("Reference array", "Reference to an array", "&array_name[ ]"));
+
+        gridParameters.setItems(itemsParameters);
+        gridParameters.setWidth("50%");
+        gridParameters.setHeight("210px");
+        gridParameters.getStyle().set("margin-left", "20px");
+        gridParameters.addThemeVariants(GridVariant.LUMO_ROW_STRIPES);
+
+        add(p32, p33, p34);
+        add(gridParameters);
+
+        Span p35 = createSpan("Function can return an integer but it does not have to return anything.");
+        Span p37 = createSpan("You can call the defined function anywhere after defining it.");
+        Span p36 = createSpan("Here you can see an example of a function definition that uses all 4 types of " +
+                                        "parameters and examples of calling the defined function: ");
+
+        String functionContent = """
+                function change(varInt, &varRefInt, varArr[], &varRefArr[]){
+                    varInt += 1
+                    varRefInt += 1
+                    varArr[1] = 2
+                    varRefArr[1] = 2
+                    
+                    return varInt
+                }
+                
+                a = 3
+                b = 3
+                c = {9, 8, 7}
+                d = {9, 8, 7}
+                change(a, b, c, d)
+                result = change(a, b, c, d)
+                """;
+        TextArea funExamp = createExample(functionContent);
+
+        Span p38 = createSpan("After calling the function the values of variables are: ");
+
+        String resultContent = """
+                a = 3
+                b = 4
+                c = {9, 8, 7}
+                d = {9, 2, 7}
+                result = 4
+                """;
+        TextArea resultExamp = createExample(resultContent);
+        resultExamp.setHeight("150px");
+
+        add(p35, p37, p36, funExamp, p38, resultExamp);
 
         H2 animation = createTitle("Enabling visualization");
         add(animation);
@@ -160,7 +226,7 @@ public class AboutView extends VerticalLayout {
 
         String bubbleContent = """
                 for(i = 0; i < size(data) - 1; i = i + 1){
-                 	for(j = 0; j < size(data) - 1; j = j + 1){
+                 	for(j = 0; j < size(data) - i - 1; j = j + 1){
                  		if(data[j] > data[j + 1]){
                  			swap(data, j, j +1)
                  			sleep(100)

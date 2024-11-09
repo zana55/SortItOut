@@ -27,6 +27,7 @@ public class Function_Call_Node implements AST_Node {
             add_argument_to_frame(frame, memory, parameter, argument);
         }
         memory.append_frame(frame);
+        //System.out.println(memory);
         try {
             function.function_block.execute(memory);
         } catch(ReturnException re) {
@@ -55,7 +56,7 @@ public class Function_Call_Node implements AST_Node {
             frame.add_reference(parameter.token.get_value(), variable.get_name());
         } else if (!parameter.is_reference && parameter.is_array) {
             Variable_Node variable = (Variable_Node) argument;
-            frame.add_array(parameter.token.get_value(), memory.get_array(variable.get_name()));
+            frame.add_array(parameter.token.get_value(), new ArrayList<>(memory.get_array(variable.get_name())));
         } else if (!parameter.is_reference && !parameter.is_array) {
             frame.add_variable(parameter.token.get_value(), argument.value(memory));
         }

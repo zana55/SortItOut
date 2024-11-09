@@ -3,6 +3,7 @@ C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\co
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\parser\Variable_Node.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\parser\Assign_Node.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\parser\Memory_Element.java
+C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\services\AdminDetailsService.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\parser\AST_Execution_Thread.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\parser\Memory_Element_Reference_Array.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\parser\Frame.java
@@ -15,6 +16,7 @@ C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\co
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\parser\For_Node.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\parser\Block_Node.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\about\AboutView.java
+C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\admin\AdminView.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\entities\ATRRepository.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\parser\AST_Node.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\parser\Memory_Element_Array.java
@@ -24,6 +26,7 @@ C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\co
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\parser\Lexer.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\sorts\CustomSort.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\parser\If_Node.java
+C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\admin\SecurityConfiguration.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\parser\Algorithm_Node.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\parser\Unary_Operation_Node.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\services\ATRService.java
@@ -33,6 +36,8 @@ C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\co
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\parser\Function_Call_Node.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\sorts\BubbleSort.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\parser\Print_Node.java
+C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\entities\AdminRepository.java
+C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\admin\LoginView.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\parser\Memory.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\parser\Swap_Node.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\sorts\SortTime.java
@@ -41,6 +46,7 @@ C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\co
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\services\CAService.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\entities\AlgorithmUsage.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\parser\Memory_Element_Integer.java
+C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\about\ParameterInfo.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\parser\While_Node.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\parser\Memory_Element_Type.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\parser\Size_Node.java
@@ -59,4 +65,6 @@ C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\co
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\parser\Memory_Element_Reference_Integer.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\parser\Sleep_Node.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\main\parser\Return_Node.java
+C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\entities\Admin.java
+C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\services\SecurityService.java
 C:\Users\Zvonko\Desktop\faks\DiplomskiRad\pocetak\my-app\my-app\src\main\java\com\example\application\views\MainLayout.java

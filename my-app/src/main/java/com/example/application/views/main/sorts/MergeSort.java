@@ -10,12 +10,14 @@ import static com.example.application.views.main.HelperFunctions.createBars;
 
 public class MergeSort<T extends Comparable<T>> implements SortAlgorithm<T> {
 
-    private static final int ANIMATION_DELAY = 200;
+    private static final int ANIMATION_DELAY = 130;
     private boolean visualize;
+    private boolean descending;
     private Div container;
 
-    public MergeSort(boolean visualize, Div container) {
+    public MergeSort(boolean visualize, Div container, boolean descending) {
         this.visualize = visualize;
+        this.descending = descending;
         this.container = container;
     }
 
@@ -77,7 +79,8 @@ public class MergeSort<T extends Comparable<T>> implements SortAlgorithm<T> {
         int right = middle + 1;
         int current = leftStart;
         while (left <= middle && right <= rightEnd) {
-            if (tempArray[left].compareTo(tempArray[right]) <= 0) {
+            if ((descending && tempArray[left].compareTo(tempArray[right]) > 0) ||
+                    (!descending && tempArray[left].compareTo(tempArray[right]) <= 0)) {
                 array[current] = tempArray[left];
                 left++;
             } else {
@@ -98,7 +101,8 @@ public class MergeSort<T extends Comparable<T>> implements SortAlgorithm<T> {
         int current = leftStart;
 
         while (left <= middle && right <= rightEnd) {
-            if (tempArray[left].compareTo(tempArray[right]) <= 0) {
+            if ((descending && tempArray[left].compareTo(tempArray[right]) > 0) ||
+                    (!descending && tempArray[left].compareTo(tempArray[right]) <= 0)) {
                 array[current] = tempArray[left];
                 visual_swap(array, currentUI);
                 try {

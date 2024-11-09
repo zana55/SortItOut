@@ -10,12 +10,14 @@ import static com.example.application.views.main.HelperFunctions.createBars;
 
 public class SelectionSort<T extends Comparable<T>> implements SortAlgorithm<T> {
 
-    private static final int ANIMATION_DELAY = 200;
+    private static final int ANIMATION_DELAY = 130;
     private boolean visualize;
+    private boolean descending;
     private Div container;
 
-    public SelectionSort(boolean visualize, Div container) {
+    public SelectionSort(boolean visualize, Div container, boolean descending) {
         this.visualize = visualize;
+        this.descending = descending;
         this.container = container;
     }
 
@@ -31,13 +33,14 @@ public class SelectionSort<T extends Comparable<T>> implements SortAlgorithm<T> 
     public void normalSort(T[] array) {
         int n = array.length;
         for (int i = 0; i < n - 1; i++) {
-            int minIndex = i;
+            int targetIndex = i;
             for (int j = i + 1; j < n; j++) {
-                if (array[j].compareTo(array[minIndex]) < 0) {
-                    minIndex = j;
+                if ((descending && array[j].compareTo(array[targetIndex]) > 0) ||
+                        (!descending && array[j].compareTo(array[targetIndex]) < 0)) {
+                    targetIndex = j;
                 }
             }
-            swap(array, minIndex, i);
+            swap(array, targetIndex, i);
         }
     }
 
@@ -46,13 +49,14 @@ public class SelectionSort<T extends Comparable<T>> implements SortAlgorithm<T> 
         new Thread(() -> {
             int n = array.length;
             for (int i = 0; i < n - 1; i++) {
-                int minIndex = i;
+                int targetIndex = i;
                 for (int j = i + 1; j < n; j++) {
-                    if (array[j].compareTo(array[minIndex]) < 0) {
-                        minIndex = j;
+                    if ((descending && array[j].compareTo(array[targetIndex]) > 0) ||
+                            (!descending && array[j].compareTo(array[targetIndex]) < 0)) {
+                        targetIndex = j;
                     }
                 }
-                swap(array, minIndex, i);
+                swap(array, targetIndex, i);
                 visual_swap(array, currentUI);
                 try {
                     Thread.sleep(ANIMATION_DELAY);

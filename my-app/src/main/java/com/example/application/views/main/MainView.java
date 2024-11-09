@@ -23,9 +23,11 @@ import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.component.upload.receivers.MemoryBuffer;
+import com.vaadin.flow.dom.ElementFactory;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -41,6 +43,7 @@ import java.util.stream.Collectors;
 @Route(value = "/main", layout = MainLayout.class)
 @RouteAlias(value = "", layout = MainLayout.class)
 @Uses(ComboBox.class)
+@AnonymousAllowed
 public class MainView extends VerticalLayout {
 
     // layouts
@@ -87,6 +90,7 @@ public class MainView extends VerticalLayout {
 
         inputCodeField = new TextArea("Create your own sorting algorithm!");
         inputCodeField.setWidth("30%");
+        inputCodeField.setHeight("200px");
 
         doneButton = new Button("Done!", e -> createAlgorithm());
         doneButton.getStyle().set("margin-top", "40px");
@@ -187,11 +191,18 @@ public class MainView extends VerticalLayout {
 
         Checkbox animation = new Checkbox();
         animation.setLabel("I want visuals for sorting my data!");
-        mainVertical.add(animation);
+
+        Checkbox descending = new Checkbox();
+        descending.setLabel("I want the data sorted in descending order!");
+
+        HorizontalLayout checkboxes = new HorizontalLayout(animation, descending);
+        checkboxes.setWidth("100%");
+
+        mainVertical.add(checkboxes);
 
         Button sortButton = new Button("Sort it out!", e -> {
             try {
-                sort(animation.getValue());
+                sort(animation.getValue(), descending.getValue());
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
@@ -273,14 +284,14 @@ public class MainView extends VerticalLayout {
     }
 
     // create a new instance of selected algorithm
-    private SortAlgorithm<Integer> getSorter(String algorithm, Div container, boolean animation)
+    private SortAlgorithm<Integer> getSorter(String algorithm, Div container, boolean animation, boolean descending)
     {
         return switch (algorithm) {
-            case "Bubble Sort" -> new BubbleSort<>(animation, container);
-            case "Quick Sort" -> new QuickSort<>(animation, container);
-            case "Merge Sort" -> new MergeSort<>(animation, container);
-            case "Selection Sort" -> new SelectionSort<>(animation, container);
-            case "Insertion Sort" -> new InsertionSort<>(animation, container);
+            case "Bubble Sort" -> new BubbleSort<>(animation, container, descending);
+            case "Quick Sort" -> new QuickSort<>(animation, container, descending);
+            case "Merge Sort" -> new MergeSort<>(animation, container, descending);
+            case "Selection Sort" -> new SelectionSort<>(animation, container, descending);
+            case "Insertion Sort" -> new InsertionSort<>(animation, container, descending);
             default -> null;
         };
     }
@@ -298,7 +309,7 @@ public class MainView extends VerticalLayout {
     }
 
     // handling sorting after clicking sortButton
-    private void sort(boolean animation) throws IOException
+    private void sort(boolean animation, boolean descending) throws IOException
     {
         visualGroup.removeAll();
         Set<String> selectedAlgorithms = algorithmSelector.getValue();
@@ -329,7 +340,7 @@ public class MainView extends VerticalLayout {
         for(String algorithm : selectedAlgorithms)
         {
             Integer[] numbersCopy = numbers.clone();
-            sorter = getSorter(algorithm, null, false);
+            sorter = getSorter(algorithm, null, false, descending);
 
             if (sorter != null) {
                 long startTime = System.nanoTime();
@@ -340,9 +351,6 @@ public class MainView extends VerticalLayout {
                 timings.add(new SortTime(algorithm, durationMs));
 
                 onAlgorithmFinish(algorithm, numbers.length, durationMs);
-
-                System.out.println(algorithm);
-                System.out.println(durationMs);
 
                 if (!isResultShown)
                 {
@@ -357,14 +365,14 @@ public class MainView extends VerticalLayout {
 
         if(animation && numbers.length <= 70)
         {
-            animate(selectedAlgorithms, numbers);
+            animate(selectedAlgorithms, numbers, descending);
         }
     }
 
     // animating visual sorting
-    private void animate(Set<String> selectedAlgorithms, Integer[] numbers)
+    private void animate(Set<String> selectedAlgorithms, Integer[] numbers, boolean descending)
     {
-        visualGroup.add(new AnimatedSort<>(selectedAlgorithms, numbers));
+        visualGroup.add(new AnimatedSort<>(selectedAlgorithms, numbers, descending));
         visualGroup.setVisible(true);
     }
 
@@ -486,11 +494,9 @@ public class MainView extends VerticalLayout {
     {
         for (int i = 0; i < array.size() - 1; i++) {
             if (array.get(i) > array.get(i + 1)) {
-                //System.out.println(array + " Unsorted!");
                 return false;
             }
         }
-        //System.out.println("Sorted!");
         return true;
     }
 
